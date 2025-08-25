@@ -1,13 +1,16 @@
 {
   "name": "venturus",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projeto dado pela empresa Venturus com o objetivo ",
   "main": "server.js",
   "scripts": {
     "start:dev": "nodemon ./"
   },
   "keywords": [],
-  "author": "",
+  "author_1": "Breno Valentim",
+  "author_2": "Fabrício Krull",
+  "author_3": "Gabriel Comparini",
+  "author_4": "João Crepaldi",
   "license": "ISC",
   "type": "module",
   "dependencies": {
