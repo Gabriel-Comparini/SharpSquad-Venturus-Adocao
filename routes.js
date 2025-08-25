@@ -6,7 +6,7 @@ const PORT = 3000;
 
 app.use(express.json());
 
-app.get("/animais", (req, red) => {
+app.get("/animais", (req, res) => {
     
 })
 
