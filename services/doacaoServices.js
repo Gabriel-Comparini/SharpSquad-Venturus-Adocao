@@ -1,5 +1,6 @@
 import Doacoes from './models/Doacoes.js';
 
+/* apagar comentario que so serve pra commitar na main */
 export async function findAllDoacoess(){
     return Doacoes.findAll();
 }
