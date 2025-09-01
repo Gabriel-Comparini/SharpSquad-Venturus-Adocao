@@ -1,20 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import sequelize from './models/Modelos.js';
 import { deleteAdmAnimais, getAdmAnimais, getAnimaisById, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postTutores } from './routes.js';
 
 export const app = express();
 const port = 3000;
 const host = 'localhost';
 
-(async () => {
-    try {
-        await sequelize.authenticate();
-        console.log('Foi!');
-    } catch (error) {
-        console.error('Não foi!', error);
-    }
-})();
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 app.get('/', (req, res) => {
     res.send('<strong>Server ta funfando com sucesso!</strong>');
