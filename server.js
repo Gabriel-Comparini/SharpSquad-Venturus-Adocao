@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import sequelize from './models/Modelos.js';
 
-const app = express();
+export const app = express();
 const port = 3000;
 const host = 'localhost';
 
@@ -19,12 +19,12 @@ app.get('/', (req, res) => {
     res.send('<strong>Server ta funfando com sucesso!</strong>');
 });
 
-app.post('/usuarios', (req, res) => {
-    res.status(201);
+app.get("/animais", (req, res) => {
+    
 });
 
-app.post('/doacoes', (req, res) => {
-    res.status(201);
+app.post('/animais', (req, res) => {
+
 });
 
 app.listen(port, (err) => {
