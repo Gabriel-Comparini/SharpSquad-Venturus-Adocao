@@ -9,5 +9,5 @@ export async function findQuestionarioById(id){
 }
 
 export async function createQuestionario(body){
-    Questionario.Create(body);
+    Questionario.create(body);
 }

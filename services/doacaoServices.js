@@ -10,5 +10,5 @@ export async function findDoacoesById(id){
 }
 
 export async function createDoacoes(body){
-    Doacoes.Create(body);
+    Doacoes.create(body);
 }

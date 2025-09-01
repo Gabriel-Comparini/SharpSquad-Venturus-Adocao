@@ -9,5 +9,5 @@ export async function findpedidoAdocaoById(id){
 }
 
 export async function createpedidoAdocao(body){
-    pedidoAdocao.Create(body);
+    pedidoAdocao.create(body);
 }

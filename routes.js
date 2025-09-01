@@ -1,3 +1,5 @@
+import { loginServices } from "./services/loginServices"
+
 export async function getAnimal(req, res) {
 
 }
@@ -80,7 +82,7 @@ export async function getAnimaisById(req, res) {
 
 export async function postLogin(req, res) {
     try {
-        
+        return res.status(201).send(await loginServices());
     } catch (error) {
         console.error('Deu erro na rota postLogin: ', error)
     }
