@@ -1,5 +1,5 @@
 import {sequelize} from sequelize;
-import {express} from express;
+import {express} from express ;
 
 const app = express();
 const PORT = 3000;
