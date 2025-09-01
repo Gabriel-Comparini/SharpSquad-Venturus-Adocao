@@ -1,4 +1,4 @@
-import { createAnimal, findAllAnimals } from "./services/animalServices";
+import { createAnimal, findAllAnimals } from "./services/animalServices.js";
 
 export async function getAnimal(req, res) {
     try {
@@ -10,8 +10,8 @@ export async function getAnimal(req, res) {
 
 export async function postAnimal(req, res) {
     try {
-        createAnimal(req.body);
-        return res.status(201).json(req.body);
+        
+        return res.status(201).json(await createAnimal(req.body));
     } catch (error) {
         return res.status(500).send("Erro ao criar animal");
     }
