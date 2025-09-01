@@ -1,11 +1,20 @@
 import { loginServices } from "./services/loginServices"
 
 export async function getAnimal(req, res) {
-
+    try {
+        return res.status(201).send(await findAllAnimals());
+    } catch (error) {
+        return res.status(500).send("Erro ao consultar animais");
+    }
 }
 
 export async function postAnimal(req, res) {
-    
+    try {
+        
+        return res.status(201).json(await createAnimal(req.body));
+    } catch (error) {
+        return res.status(500).send("Erro ao criar animal");
+    }
 }
 
 export async function postTutores(req, res) {
