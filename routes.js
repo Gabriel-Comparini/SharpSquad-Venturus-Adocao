@@ -1,8 +1,9 @@
-import { loginServices } from "./services/loginServices"
+import {Animal, Doacao, PedidoAdocao, Questionario} from './models/Modelos.js';
+import {create, findAll, findById} from './services/acessServices.js'
 
 export async function getAnimal(req, res) {
     try {
-        return res.status(201).send(await findAllAnimals());
+        return res.status(201).send(await findAll(Animal));
     } catch (error) {
         return res.status(500).send("Erro ao consultar animais");
     }
@@ -11,9 +12,9 @@ export async function getAnimal(req, res) {
 export async function postAnimal(req, res) {
     try {
         
-        return res.status(201).json(await createAnimal(req.body));
+        return res.status(201).json(await create(Animal, req.body));
     } catch (error) {
-        return res.status(500).send("Erro ao criar animal");
+        return res.status(500).send(`Erro ao criar animal ${error}`);
     }
 }
 
@@ -83,9 +84,9 @@ export async function deleteAdmAnimais(req, res) {
 
 export async function getAnimaisById(req, res) {
     try {
-        
+        return res.status(200).send(await findById(Animal, req.params.id));
     } catch (error) {
-        console.error('Deu erro na rota getAnimaisById: ', error)
+        res.status(500).send("Erro ao consultar animal");
     }
 }
 
