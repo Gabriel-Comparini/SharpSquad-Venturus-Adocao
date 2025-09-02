@@ -1,13 +1,17 @@
-import Animal from './models/Animal.js';
-
-export async function findAllAnimals(){
-    return Animal.findAll();
+export async function findAll(model){
+    return await model.findAll();
 }
 
-export async function findAnimalById(id){
-    return Animal.findByPk(id);
+export async function findById(model, id){
+    return await model.findByPk(id);
 }
 
-export async function createAnimal(body){
-    Animal.Create(body);
+export async function create(model, body){
+    try {
+        console.log(body);
+        return await model.create(body);
+    } catch (error) {
+        console.error('Erro ao criar:', error);
+        throw error;
+    }
 }

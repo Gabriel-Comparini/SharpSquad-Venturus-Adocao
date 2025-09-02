@@ -1,8 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { deleteAdmAnimais, getAdmAnimais, getAnimaisById, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postTutores } from './routes.js';
+import sequelize from './models/Modelos.js';
+import { getAnimaisById, getAnimal, postAnimal } from './routes.js';
 
 export const app = express();
+app.use(express.json());
 const port = 3000;
 const host = 'localhost';
 
@@ -15,6 +18,10 @@ app.get('/', (req, res) => {
 
 app.get("/animais", (req, res) => {
     getAnimal(req, res);
+});
+
+app.get("/animais/:id", (req, res) => {
+    getAnimaisById(req, res);
 });
 
 app.post('/animais', (req, res) => {
@@ -59,6 +66,7 @@ app.post('/login', (req, res) => {
 
 app.post('/doacoes', (req, res) => {
     postDoacoes(req, res);
+    postAnimal(req, res);
 });
 
 app.listen(port, (err) => {
