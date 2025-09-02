@@ -1,5 +1,5 @@
 import {Animal, Doacao, PedidoAdocao, Questionario} from './models/Modelos.js';
-import {create, findAll, findById} from './services/animalServices.js'
+import {create, findAll, findById} from './services/acessServices.js'
 
 export async function getAnimal(req, res) {
     try {
