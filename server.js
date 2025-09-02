@@ -1,9 +1,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import sequelize from './models/Modelos.js';
-import { getAnimal, postAnimal } from './routes.js';
+import { getAnimaisById, getAnimal, postAnimal } from './routes.js';
 
 export const app = express();
+app.use(express.json());
 const port = 3000;
 const host = 'localhost';
 
@@ -22,6 +23,10 @@ app.get('/', (req, res) => {
 
 app.get("/animais", (req, res) => {
     getAnimal(req, res);
+});
+
+app.get("/animais/:id", (req, res) => {
+    getAnimaisById(req, res);
 });
 
 app.post('/animais', (req, res) => {

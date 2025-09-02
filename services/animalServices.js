@@ -1,27 +1,17 @@
-import {Animal} from '../models/Modelos.js';
-
-export async function findAllAnimals(){
-    return await Animal.findAll();
+export async function findAll(model){
+    return await model.findAll();
 }
 
-export async function findAnimalById(id){
-    return await Animal.findByPk(id);
+export async function findById(model, id){
+    return await model.findByPk(id);
 }
 
-export async function createAnimal(body){
+export async function create(model, body){
     try {
-        ({id, nome, especie, porte, castrado, vacinado, descricao} = body);
-        return await Animal.create({
-            "id": id,
-            "nome": nome,
-            "especie": especie,
-            "porte":  porte,
-            "castrado": castrado,
-            "vacinado": vacinado,
-            "descricao":descricao
-        });
+        console.log(body);
+        return await model.create(body);
     } catch (error) {
-        console.error('Erro ao criar o animal:', error);
+        console.error('Erro ao criar:', error);
         throw error;
     }
 }
