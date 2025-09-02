@@ -1,7 +1,7 @@
 {
   "name": "venturus",
   "version": "1.0.0",
-  "description": "Projeto dado pela empresa Venturus com o objetivo ",
+  "description": "Projeto dado pela empresa Venturus com o objetivo de desenvolvermos um backend para um sistema de adoção de pets.",
   "main": "server.js",
   "scripts": {
     "start:dev": "nodemon ./"
