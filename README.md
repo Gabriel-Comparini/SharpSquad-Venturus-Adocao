@@ -4,7 +4,7 @@
 
 O projeto de adoção de animais ofertado e apoiado pela empresa **[Venturus](https://www.instagram.com/venturusoficial/)** teve seu backend feito pela equipe _**Sharp Squad**_. O projeto tem como objetivo proporcionar uma comunicação mais simples entre sistemas de bancos de dados e os centros de adoção de animais.
 
-## 💻- Tecnologias
+## 💻 Tecnologias
 
 <p align="center">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/sqlite/sqlite-original.svg" width="100"/>
