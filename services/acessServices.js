@@ -63,7 +63,7 @@ export function verificationNull() {
     let empty = false;
     const body = Object.keys(req.body);
 
-    for (const i = 1; i < 7; i++) {
+    for (const i = 0; i < body.length-1; i++) {
         if (!body[i] || body[i] == "") {
             empty = true;
         }
