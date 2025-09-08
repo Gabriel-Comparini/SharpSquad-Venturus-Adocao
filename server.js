@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { deleteAdmAnimais, getAdmAnimais, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postTutores, getAnimaisById } from './routes.js';
+import { deleteAdmAnimais, getAdmAnimais, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postTutores, getAnimaisById, patchTutores } from './routes.js';
 import sequelize from './models/Modelos.js';
 
 export const app = express();
@@ -27,8 +27,12 @@ app.post('/animais', (req, res) => {
     postAnimal(req, res);
 });
 
-app.post('/tutores/:id', (req, res) => {
+app.post('/usuarios', (req, res) => {
     postTutores(req, res);
+});
+
+app.patch('/usuarios/:id', (req, res) => {
+    patchTutores(req, res);
 });
 
 app.get('/tutores/:id', (req, res) => {

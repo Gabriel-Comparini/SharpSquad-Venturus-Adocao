@@ -1,5 +1,6 @@
 import {Animal, Doacao, PedidoAdocao, Questionario, Tutor} from './models/Modelos.js';
-import {create, findAll, findById} from './services/acessServices.js'
+import Usuario from './models/Usuario.js';
+import {create, findAll, findById, patch} from './services/acessServices.js'
 
 export async function getAnimal(req, res) {
     try {
@@ -29,7 +30,7 @@ export async function postTutores(req, res) {
 
 export async function patchTutores(req, res) {
     try {
-        
+        return res.status(200).send(await patch(Usuario, req.params.id, req.body));
     } catch (error) {
         console.error('Deu erro na rota patchTutores: ', error);
     }
