@@ -100,7 +100,7 @@ export async function postLogin(req, res) {
 
 export async function postDoacoes(req, res) {
     try {
-        
+        return 
     } catch (error) {
         console.error('Deu erro na rota postDoacoes: ', error)
     }
