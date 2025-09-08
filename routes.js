@@ -1,3 +1,5 @@
+import {Animal, Doacao, PedidoAdocao, Questionario, Tutor} from './models/Modelos.js';
+import {create, findAll, findById} from './services/acessServices.js'
 import { Animal, Doacao, PedidoAdocao, Questionario } from './models/Modelos.js';
 import { create, findAll, findById, verificationNull } from './services/acessServices.js'
 
@@ -22,8 +24,11 @@ export async function postAnimal(req, res) {
 
 export async function postTutores(req, res) {
     try {
+        return res.status(201).send(await create(Tutor, req.body));
 
     } catch (error) {
+        console.error('Deu erro na rota postTutores: ', error);
+        return res.status(500).send({"erro": "Erro interno ao cadastrar o tutor."});
 
     }
 }
@@ -32,15 +37,16 @@ export async function patchTutores(req, res) {
     try {
 
     } catch (error) {
-        console.error('Deu erro na rota patchTutores: ', error)
+        console.error('Deu erro na rota patchTutores: ', error);
     }
 }
 
 export async function getTutores(req, res) {
     try {
+
         return res.status(201).send(await findAll(Animal))
     } catch (error) {
-        console.error('Deu erro na rota getTutores: ', error)
+        console.error('Deu erro na rota getTutores: ', error);
     }
 }
 
@@ -99,22 +105,20 @@ export async function getAnimaisById(req, res) {
 }
 
 export async function postLogin(req, res) {
-    try {
-        if (!req.body || verificationNull() == true) {
-            return res.status(400).send(`erro ${error}: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
-        }
-        return res.status(201).send(await loginServices());
+    try {      
+        return res.status(201).send(`Login bem sucedido!`);
     } catch (error) {
-        console.error('Deu erro na rota postLogin: ', error)
+        console.error('Deu erro na rota postLogin: ', error);
     }
 }
 
 export async function postDoacoes(req, res) {
     try {
+        return 
         if (!req.body || verificationNull() == true) {
             return res.status(400).send(`erro ${error}: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
     } catch (error) {
-        console.error('Deu erro na rota postDoacoes: ', error)
+        console.error('Deu erro na rota postDoacoes: ', error);
     }
 }
