@@ -52,7 +52,6 @@ export async function getTutores(req, res) {
 
 export async function postQuestionario(req, res) {
     try {
-
         if (!req.body || verificationNull() == true) {
             return res.status(400).send(`erro ${error}: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
