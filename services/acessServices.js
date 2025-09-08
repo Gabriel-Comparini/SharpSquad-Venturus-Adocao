@@ -23,7 +23,7 @@ export async function findById(model, id){
     }
 }
 
-export async function create(model, body){
+export async function create(model, body) {
     try {
         console.log(body);
         return await model.create(body);
@@ -56,5 +56,16 @@ export async function deleteById(model, id) {
     } catch (error) {
         console.error('Erro ao deletar:', error);
         throw error;
+    }
+}
+
+export function verificationNull() {
+    let empty = false;
+    const body = Object.keys(req.body);
+
+    for (const i = 0; i < body.length-1; i++) {
+        if (!body[i] || body[i] == "") {
+            empty = true;
+        }
     }
 }
