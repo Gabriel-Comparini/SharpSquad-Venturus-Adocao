@@ -61,7 +61,7 @@ export async function postUsuarios(req, res) {
 
 export async function postQuestionario(req, res) {
     try {
-        if (!req.body || verificationNull() == true) {
+        if (!req.body || verificationNull()) {
             return res.status(400).send({"erro": "Erro, todos os campos obrigatórios devem ser preenchidos corretamente."});
         }
         return res.status(201).json(await create(Questionario, req.body));

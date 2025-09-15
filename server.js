@@ -58,10 +58,6 @@ app.delete('/admin/animais/:id', (req, res) => {
     deleteAdmAnimais(req, res);
 });
 
-app.get('/animais/:id', (req, res) => {
-    getAnimaisById(req, res);
-});
-
 app.post('/login', (req, res) => {
     postLogin(req, res);
 });
