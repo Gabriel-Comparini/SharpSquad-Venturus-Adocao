@@ -35,7 +35,7 @@ app.patch('/usuarios/:id', (req, res) => {
 });
 
 app.get('/usuarios/:id', (req, res) => {
-    postUsuarios(req, res);
+    getUsuarios(req, res);
 });
 
 app.post('/questionario', (req, res) => {
@@ -68,7 +68,6 @@ app.post('/login', (req, res) => {
 
 app.post('/doacoes', (req, res) => {
     postDoacoes(req, res);
-    postAnimal(req, res);
 });
 
 app.listen(port, (err) => {

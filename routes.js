@@ -1,6 +1,4 @@
-import {Animal, Doacao, PedidoAdocao, Questionario, Tutor} from './models/Modelos.js';
-// import {create, findAll, findById} from './services/acessServices.js'
-// import { Animal, Doacao, PedidoAdocao, Questionario } from './models/Modelos.js';
+import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
 import { create, findAll, findById, verificationNull } from './services/acessServices.js'
 
 /*FUNÇÕES GET*/
@@ -12,12 +10,11 @@ export async function getAnimal(req, res) {
     }
 }
 
-export async function getTutores(req, res) {
+export async function getUsuarios(req, res) {
     try {
-
-        return res.status(201).send(await findAll(Animal))
+        return res.status(201).send(await findAll(Usuario))
     } catch (error) {
-        console.error('Deu erro na rota getTutores: ', error);
+        console.error('Deu erro na rota getUsuarios: ', error);
     }
 }
 
@@ -51,12 +48,12 @@ export async function postAnimal(req, res) {
     }
 }
 
-export async function postTutores(req, res) {
+export async function postUsuarios(req, res) {
     try {
-        return res.status(201).send(await create(Tutor, req.body));
+        return res.status(201).send(await create(Usuario, req.body));
 
     } catch (error) {
-        console.error('Deu erro na rota postTutores: ', error);
+        console.error('Deu erro na rota postUsuarios: ', error);
         return res.status(500).send({"erro": "Erro interno ao cadastrar o tutor."});
 
     }
@@ -85,18 +82,16 @@ export async function postAdocoes(req, res) {
 }
 
 export async function postLogin(req, res) {
-    try { 
-        const {email, senha} = req.body;     
-        return res.status(201).json({email, senha});
+    try {      
+        return res.status(201).send(`Login bem sucedido!`);
     } catch (error) {
         console.error('Deu erro na rota postLogin: ', error);
-        return res.status(500).json({ error: 'Erro no servidor' });
     }
 }
 
 export async function postDoacoes(req, res) {
     try {
-        return 
+        return
         if (!req.body || verificationNull() == true) {
             return res.status(400).send(`erro ${error}: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
@@ -106,11 +101,11 @@ export async function postDoacoes(req, res) {
 }
 /*-------------------------------------------------------*/
 /*FUNÇÕES PATCH*/
-export async function patchTutores(req, res) {
+export async function patchUsuarios(req, res) {
     try {
         return res.status(200).send(await patch(Tutor, req.params.id, req.body));
     } catch (error) {
-        console.error('Deu erro na rota patchTutores: ', error);
+        console.error('Deu erro na rota patchUsuarios: ', error);
     }
 }
 
