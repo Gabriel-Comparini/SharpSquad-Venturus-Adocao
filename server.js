@@ -35,7 +35,7 @@ app.patch('/usuarios/:id', (req, res) => {
 });
 
 app.get('/usuarios/:id', (req, res) => {
-    postUsuarios(req, res);
+    getUsuarios(req, res);
 });
 
 app.post('/questionario', (req, res) => {
