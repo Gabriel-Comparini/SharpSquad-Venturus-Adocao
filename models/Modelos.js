@@ -15,7 +15,7 @@ export const sequelize = new Sequelize({
 });
 
 export const Animal = AnimalModel(sequelize);
-export const Tutor = UsuarioModel(sequelize);
+export const Usuario = UsuarioModel(sequelize);
 export const Questionario = QuestionarioModel(sequelize);
 export const PedidoAdocao = PedidoAdocaoModel(sequelize);
 export const Doacao = DoacaoModel(sequelize);
@@ -29,4 +29,4 @@ export const Doacao = DoacaoModel(sequelize);
 
 await sequelize.sync();
 
-export default { sequelize, Animal, Tutor, Questionario, PedidoAdocao, Doacao };
+export default { sequelize, Animal, Usuario, Questionario, PedidoAdocao, Doacao };
