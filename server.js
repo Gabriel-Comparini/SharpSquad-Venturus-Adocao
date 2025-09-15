@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { deleteAdmAnimais, getAdmAnimais, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postUsuarios, getAnimaisById, patchUsuarios } from './routes.js';
-import sequelize from './models/Modelos.js';
 
 export const app = express();
 app.use(express.json());
@@ -35,7 +34,7 @@ app.patch('/usuarios/:id', (req, res) => {
     patchUsuarios(req, res);
 });
 
-app.get('/Usuarios/:id', (req, res) => {
+app.get('/usuarios/:id', (req, res) => {
     postUsuarios(req, res);
 });
 

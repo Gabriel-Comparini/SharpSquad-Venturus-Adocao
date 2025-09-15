@@ -1,6 +1,4 @@
-import {Animal, Doacao, PedidoAdocao, Questionario, Tutor} from './models/Modelos.js';
-// import {create, findAll, findById} from './services/acessServices.js'
-// import { Animal, Doacao, PedidoAdocao, Questionario } from './models/Modelos.js';
+import {Animal, Doacao, PedidoAdocao, Questionario, Tutor, Usuario} from './models/Modelos.js';
 import { create, findAll, findById, verificationNull } from './services/acessServices.js'
 
 /*FUNÇÕES GET*/
@@ -14,8 +12,7 @@ export async function getAnimal(req, res) {
 
 export async function getTutores(req, res) {
     try {
-
-        return res.status(201).send(await findAll(Animal))
+        return res.status(201).send(await findAll(Usuario))
     } catch (error) {
         console.error('Deu erro na rota getTutores: ', error);
     }
@@ -53,7 +50,7 @@ export async function postAnimal(req, res) {
 
 export async function postTutores(req, res) {
     try {
-        return res.status(201).send(await create(Tutor, req.body));
+        return res.status(201).send(await create(Usuario, req.body));
 
     } catch (error) {
         console.error('Deu erro na rota postTutores: ', error);

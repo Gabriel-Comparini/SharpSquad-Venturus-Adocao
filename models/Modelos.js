@@ -22,12 +22,11 @@ export const Doacao = DoacaoModel(sequelize);
 
 // Associações
 // Explicação das associações:
-// - Um Tutor tem um Questionario.
-// - Um Tutor pode ter vários Pedidos de Adoção.
+// - Um Usuario tem um Questionario.
+// - Um Usuario pode ter vários Pedidos de Adoção.
 // - Um Animal pode ter vários Pedidos de Adoção.
-// A tabela PedidosAdocao serve como uma tabela de junção entre Tutores e Animais.
+// A tabela PedidosAdocao serve como uma tabela de junção entre Usuarios e Animais.
 
 await sequelize.sync();
 
 export default { sequelize, Animal, Tutor, Questionario, PedidoAdocao, Doacao };
-//export default { sequelize, Animal, Questionario, PedidoAdocao, Doacao };
