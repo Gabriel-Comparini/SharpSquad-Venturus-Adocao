@@ -1,7 +1,5 @@
 import {Animal, Doacao, PedidoAdocao, Questionario, Tutor} from './models/Modelos.js';
-import {create, findAll, findById} from './services/acessServices.js'
-import { Animal, Doacao, PedidoAdocao, Questionario } from './models/Modelos.js';
-import { create, findAll, findById, verificationNull } from './services/acessServices.js'
+import { create, findAll, findById, verificationNull } from './services/acessServices.js';
 
 /*FUNÇÕES GET*/
 export async function getAnimal(req, res) {
@@ -94,7 +92,7 @@ export async function postLogin(req, res) {
 
 export async function postDoacoes(req, res) {
     try {
-        return 
+        return
         if (!req.body || verificationNull() == true) {
             return res.status(400).send(`erro ${error}: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
