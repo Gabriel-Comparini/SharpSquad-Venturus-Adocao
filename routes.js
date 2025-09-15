@@ -85,10 +85,12 @@ export async function postAdocoes(req, res) {
 }
 
 export async function postLogin(req, res) {
-    try {      
-        return res.status(201).json()
+    try { 
+        const {email, senha} = req.body;     
+        return res.status(201).json({email, senha});
     } catch (error) {
         console.error('Deu erro na rota postLogin: ', error);
+        return res.status(500).json({ error: 'Erro no servidor' });
     }
 }
 
