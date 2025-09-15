@@ -68,7 +68,6 @@ app.post('/login', (req, res) => {
 
 app.post('/doacoes', (req, res) => {
     postDoacoes(req, res);
-    postAnimal(req, res);
 });
 
 app.listen(port, (err) => {

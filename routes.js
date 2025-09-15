@@ -10,11 +10,11 @@ export async function getAnimal(req, res) {
     }
 }
 
-export async function getTutores(req, res) {
+export async function getUsuarios(req, res) {
     try {
         return res.status(201).send(await findAll(Usuario))
     } catch (error) {
-        console.error('Deu erro na rota getTutores: ', error);
+        console.error('Deu erro na rota getUsuarios: ', error);
     }
 }
 
@@ -48,12 +48,12 @@ export async function postAnimal(req, res) {
     }
 }
 
-export async function postTutores(req, res) {
+export async function postUsuarios(req, res) {
     try {
         return res.status(201).send(await create(Usuario, req.body));
 
     } catch (error) {
-        console.error('Deu erro na rota postTutores: ', error);
+        console.error('Deu erro na rota postUsuarios: ', error);
         return res.status(500).send({"erro": "Erro interno ao cadastrar o tutor."});
 
     }
@@ -101,11 +101,11 @@ export async function postDoacoes(req, res) {
 }
 /*-------------------------------------------------------*/
 /*FUNÇÕES PATCH*/
-export async function patchTutores(req, res) {
+export async function patchUsuarios(req, res) {
     try {
         return res.status(200).send(await patch(Tutor, req.params.id, req.body));
     } catch (error) {
-        console.error('Deu erro na rota patchTutores: ', error);
+        console.error('Deu erro na rota patchUsuarios: ', error);
     }
 }
 
