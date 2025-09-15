@@ -1,6 +1,3 @@
-import { Sequelize, where } from "sequelize";
-import { sequelize } from "../models/Modelos.js";
-
 export async function findAll(model){
     try {
         return await model.findAll();
