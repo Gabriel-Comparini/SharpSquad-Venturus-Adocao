@@ -33,7 +33,7 @@ export async function create(model, body) {
     }
 }
 
-export async function patch(model, id, body) { // consertar
+export async function patch(model, id, body) {
     try {
         return await model.update(body, {
             where: {

@@ -1,7 +1,5 @@
 import {Animal, Doacao, PedidoAdocao, Questionario, Tutor} from './models/Modelos.js';
-import {create, findAll, findById} from './services/acessServices.js'
-import { Animal, Doacao, PedidoAdocao, Questionario } from './models/Modelos.js';
-import { create, findAll, findById, verificationNull } from './services/acessServices.js'
+import { create, findAll, findById, patch, verificationNull } from './services/acessServices.js'
 
 /*FUNÇÕES GET*/
 export async function getAnimal(req, res) {
@@ -15,7 +13,7 @@ export async function getAnimal(req, res) {
 export async function getTutores(req, res) {
     try {
 
-        return res.status(201).send(await findAll(Animal))
+        return res.status(201).send(await findAll(Tutor))
     } catch (error) {
         console.error('Deu erro na rota getTutores: ', error);
     }
@@ -43,9 +41,9 @@ export async function getAnimaisById(req, res) {
 export async function postAnimal(req, res) {
     try {
         if (!req.body || verificationNull() == true) {
-            return res.status(400).send(`erro ${error}: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
+            return res.status(400).send(`erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
-        return res.status(201).json(await create(Animal, req.body));
+        return res.status(201).send(await create(Animal, req.body));
     } catch (error) {
         return res.status(500).send(`Erro ao criar animal ${error}`);
     }
@@ -106,7 +104,7 @@ export async function postDoacoes(req, res) {
 /*FUNÇÕES PATCH*/
 export async function patchTutores(req, res) {
     try {
-        return res.status(200).send(await patch(Usuario, req.params.id, req.body));
+        return res.status(200).send(await patch(Tutor, req.params.id, req.body));
 
     } catch (error) {
         console.error('Deu erro na rota patchTutores: ', error);
