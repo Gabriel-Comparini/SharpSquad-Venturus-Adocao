@@ -1,5 +1,5 @@
 import { Sequelize, where } from "sequelize";
-import { sequelize } from "../models/Modelos";
+import { sequelize } from "../models/Modelos.js";
 
 export async function findAll(model){
     try {
@@ -33,7 +33,7 @@ export async function create(model, body) {
     }
 }
 
-export async function patch(model, id, body) {
+export async function patch(model, id, body) { // consertar
     try {
         return await model.update(body, {
             where: {
