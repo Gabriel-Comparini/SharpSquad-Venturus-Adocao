@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { deleteAdmAnimais, getAdmAnimais, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postUsuarios, getAnimaisById, patchUsuarios } from './routes.js';
+import { deleteAdmAnimais, getAdmAnimais, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postUsuarios, getAnimaisById, patchUsuarios, getUsuarios } from './routes.js';
 
 export const app = express();
 app.use(express.json());
@@ -35,7 +35,7 @@ app.patch('/usuarios/:id', (req, res) => {
 });
 
 app.get('/usuarios/:id', (req, res) => {
-    postUsuarios(req, res);
+    getUsuarios(req, res);
 });
 
 app.post('/questionario', (req, res) => {

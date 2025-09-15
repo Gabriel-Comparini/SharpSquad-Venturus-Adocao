@@ -1,6 +1,5 @@
 import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
 import { create, findAll, findById, verificationNull } from './services/acessServices.js'
-
 /*FUNÇÕES GET*/
 export async function getAnimal(req, res) {
     try {
@@ -12,7 +11,7 @@ export async function getAnimal(req, res) {
 
 export async function getUsuarios(req, res) {
     try {
-        return res.status(201).send(await findAll(Usuario))
+        return res.status(201).send(await findById(Usuario, req.params.id));
     } catch (error) {
         console.error('Deu erro na rota getUsuarios: ', error);
     }
