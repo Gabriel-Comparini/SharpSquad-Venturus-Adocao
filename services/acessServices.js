@@ -56,11 +56,14 @@ export async function deleteById(model, id) {
 
 export function verificationNull(req) {
     let empty = false;
+    // Padrão de retorno falso
     const keys = Object.keys(req.body);
 
 
     for (let i = 0; i < keys.length; i++) {
+        // req.body[keys[i]] representa o valor da chave, no índice específico, do corpo da requisição
         const value = req.body[keys[i]];
+        // Aqui, value é o valor em si, enquanto que keys[i] remete ao nome do campo.
         if ((value === undefined || value === null || value === "") && keys[i].toLowerCase() !== "foto") {
             empty = true;
         }
