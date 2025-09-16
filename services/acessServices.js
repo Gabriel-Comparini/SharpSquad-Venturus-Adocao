@@ -1,3 +1,5 @@
+import { Sequelize, where } from "sequelize";
+
 export async function findAll(model){
     try {
         return await model.findAll();
@@ -9,11 +11,7 @@ export async function findAll(model){
 
 export async function findById(model, id){
     try {
-        return await model.findByPk({
-            where: {
-                id: id
-            }
-        });
+        return await model.findByPk(id);
     } catch (error) {
         console.error('Erro ao procurar por id: ', error);
         throw error;
@@ -56,13 +54,16 @@ export async function deleteById(model, id) {
     }
 }
 
-export function verificationNull() {
+export function verificationNull(req) {
     let empty = false;
-    const body = Object.keys(req.body);
+    const keys = Object.keys(req.body);
 
-    for (let i = 0; i < body.length-1; i++) {
-        if (!body[i] || body[i] == "") {
+
+    for (let i = 0; i < keys.length; i++) {
+        const value = req.body[keys[i]];
+        if ((value === undefined || value === null || value === "") && keys[i].toLowerCase() !== "foto") {
             empty = true;
         }
     }
+    return empty;
 }

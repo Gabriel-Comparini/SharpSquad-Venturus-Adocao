@@ -39,8 +39,8 @@ export async function getAnimaisById(req, res) {
 
 export async function postAnimal(req, res) {
     try {
-        if (!req.body || verificationNull() == true) {
-            return res.status(400).send(`erro ${error}: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
+        if (!req.body || verificationNull(req, 1) == true) {
+            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).json(await create(Animal, req.body));
     } catch (error) {
@@ -61,8 +61,8 @@ export async function postUsuarios(req, res) {
 
 export async function postQuestionario(req, res) {
     try {
-        if (!req.body || verificationNull()) {
-            return res.status(400).send({"erro": "Erro, todos os campos obrigatórios devem ser preenchidos corretamente."});
+        if (!req.body || verificationNull(req) == true) {
+            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).json(await create(Questionario, req.body));
     } catch (error) {
@@ -72,8 +72,8 @@ export async function postQuestionario(req, res) {
 
 export async function postAdocoes(req, res) {
     try {
-        if (!req.body || verificationNull() == true) {
-            return res.status(400).send({"erro": "Erro, todos os campos obrigatórios devem ser preenchidos corretamente."});
+        if (!req.body || verificationNull(req) == true) {
+            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).send(await create(PedidoAdocao, req.body));
     } catch (error) {
@@ -91,10 +91,10 @@ export async function postLogin(req, res) {
 
 export async function postDoacoes(req, res) {
     try {
-        return
-        if (!req.body || verificationNull() == true) {
-            return res.status(400).send(`erro ${error}: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
+        if (!req.body || verificationNull(req) == true) {
+            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
+        // return
     } catch (error) {
         console.error('Deu erro na rota postDoacoes: ', error);
     }
