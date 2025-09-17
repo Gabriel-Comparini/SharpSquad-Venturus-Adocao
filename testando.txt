@@ -14,17 +14,17 @@
 |---------------------------|---------------------------
 | POST /adocoes             | Funciona
 |---------------------------|---------------------------
-| GET /admin/animais        |
+| GET /admin/animais        | Não implementado
 |---------------------------|---------------------------
-| PATCH /admin/animais/:id  |
+| PATCH /admin/animais/:id  | Não implementado
 |---------------------------|---------------------------
-| DELETE /admin/animais/:id |
+| DELETE /admin/animais/:id | Não implementado
 |---------------------------|---------------------------
 | GET /animais/:id          | Funciona
 |---------------------------|---------------------------
-| POST /login               |
+| POST /login               | Não implementado
 |---------------------------|---------------------------
-| POST /doacoes             |
+| POST /doacoes             | Não implementado
 
 *------------------------------------------------------*
 

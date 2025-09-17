@@ -1,5 +1,6 @@
 import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
 import { create, findAll, findById, verificationNull, patch } from './services/acessServices.js'
+import bcrypt from 'bcrypt';
 
 /*FUNÇÕES GET*/
 export async function getAnimal(req, res) {
@@ -12,7 +13,7 @@ export async function getAnimal(req, res) {
 
 export async function getUsuarios(req, res) {
     try {
-        return res.status(201).send(await findAll(Usuario))
+        return res.status(201).send(await findById(Usuario, req.params.id));
     } catch (error) {
         console.error('Deu erro na rota getUsuarios: ', error);
     }
@@ -50,8 +51,8 @@ export async function postAnimal(req, res) {
 
 export async function postUsuarios(req, res) {
     try {
+        req.body.senha = await bcrypt.hash(req.body.senha, 10);
         return res.status(201).send(await create(Usuario, req.body));
-
     } catch (error) {
         console.error('Deu erro na rota postUsuarios: ', error);
         return res.status(500).send({"erro": "Erro interno ao cadastrar o tutor."});
