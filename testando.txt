@@ -10,21 +10,21 @@
 |---------------------------|---------------------------
 | GET /usuarios/:id         | Funciona
 |---------------------------|---------------------------
-| POST /questionário        | Não implementado
+| POST /questionário        | Trabalha crepaldi (não funciona)
 |---------------------------|---------------------------
 | POST /adocoes             | Funciona
 |---------------------------|---------------------------
-| GET /admin/animais        | Não implementado
+| GET /admin/animais        | Logica feita, ainda não está pronto (todos os adms estão assim)
 |---------------------------|---------------------------
-| PATCH /admin/animais/:id  | Não implementado
+| PATCH /admin/animais/:id  | Logica feita, ainda não está pronto (todos os adms estão assim)
 |---------------------------|---------------------------
-| DELETE /admin/animais/:id | Não implementado
+| DELETE /admin/animais/:id | Logica feita, ainda não está pronto (todos os adms estão assim)
 |---------------------------|---------------------------
 | GET /animais/:id          | Funciona
 |---------------------------|---------------------------
-| POST /login               | Não implementado
+| POST /login               | Funciona (melhor rever)
 |---------------------------|---------------------------
-| POST /doacoes             | Não implementado
+| POST /doacoes             | Funciona (melhor rever)
 
 *------------------------------------------------------*
 
@@ -36,4 +36,7 @@
 |---------------------------|---------------------------
 | PATCH                     | Funciona
 |---------------------------|---------------------------
-| DELETE                    | Não testado
+| DELETE                    | Funciona
+
+
+Exemplos:

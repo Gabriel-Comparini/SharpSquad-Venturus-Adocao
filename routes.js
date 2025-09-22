@@ -1,5 +1,5 @@
 import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
-import { create, findAll, findById, verificationNull, patch } from './services/acessServices.js'
+import { create, findAll, findById, verificationNull, patch, deleteById } from './services/acessServices.js'
 import bcrypt from 'bcrypt';
 
 /*FUNÇÕES GET*/
@@ -21,7 +21,9 @@ export async function getUsuarios(req, res) {
 
 export async function getAdmAnimais(req, res) {
     try {
-
+        if (JSON.parse(req.body.administrador) === true) {
+            return res.status(200).send(await findAll(Animal));
+        }
     } catch (error) {
         console.error('Deu erro na rota getAdmAnimais: ', error);
     }
@@ -95,7 +97,7 @@ export async function postDoacoes(req, res) {
         if (!req.body || verificationNull(req) == true) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
-        // return
+        return res.status(201).send(await create(Doacao, req.body)); 
     } catch (error) {
         console.error('Deu erro na rota postDoacoes: ', error);
     }
@@ -112,7 +114,9 @@ export async function patchUsuarios(req, res) {
 
 export async function patchAdmAnimais(req, res) {
     try {
-
+        if (JSON.parse(req.body.administrador) === true) {
+            return res.status(200).send(await patch(Animal, req.params.id, req.body));
+        }
     } catch (error) {
         console.error('Deu erro na rota patchAdmAnimais: ', error);
     }
@@ -122,7 +126,9 @@ export async function patchAdmAnimais(req, res) {
 
 export async function deleteAdmAnimais(req, res) {
     try {
-
+        if (JSON.parse(req.body.administrador) === true) {
+            return res.status(204).send(await deleteById(Animal, req.params.id));
+        }
     } catch (error) {
         console.error('Deu erro na rota deleteAdmAnimais: ', error);
     }
