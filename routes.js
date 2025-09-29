@@ -1,11 +1,10 @@
-import e from 'express';
 import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
 import { create, findAll, findById, verificationNull, patch, deleteById } from './services/acessServices.js'
 import bcrypt from 'bcrypt';
 
 /*FUNÇÕES GET*/
 export async function getAnimal(req, res) {
-    try {parseBool
+    try {
         return res.status(201).send(await findAll(Animal));
     } catch (error) {
         return res.status(500).send("Erro ao consultar animais");
@@ -46,7 +45,7 @@ export async function getAnimaisById(req, res) {
 
 export async function postAnimal(req, res) {
     try {
-        if (!req.body || verificationNull(req, "POST") == true) {
+        if (!req.body || verificationNull(req, "POST") == false) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).json(await create(Animal, req.body));
@@ -58,7 +57,7 @@ export async function postAnimal(req, res) {
 export async function postUsuarios(req, res) {
     try {
         req.body.senha = await bcrypt.hash(req.body.senha, 10);
-        if (!req.body || verificationNull(req, "POST") == true) {
+        if (!req.body || verificationNull(req, "POST") == false) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).send(await create(Usuario, req.body));
@@ -71,7 +70,7 @@ export async function postUsuarios(req, res) {
 
 export async function postQuestionario(req, res) {
     try {
-        if (!req.body || verificationNull(req, "POST") == true) {
+        if (!req.body || verificationNull(req, "POST") == false) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).json(await create(Questionario, req.body));
@@ -82,7 +81,7 @@ export async function postQuestionario(req, res) {
 
 export async function postAdocoes(req, res) {
     try {
-        if (!req.body || verificationNull(req, "POST") == true) {
+        if (!req.body || verificationNull(req, "POST") == false) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).send(await create(PedidoAdocao, req.body));
