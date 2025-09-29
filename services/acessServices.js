@@ -7,7 +7,7 @@ export async function findAll(model){
     }
 }
 
-export async function findById(model, id){
+export async function findById(model, id) {
     try {
         return await model.findByPk(id);
     } catch (error) {
@@ -52,19 +52,42 @@ export async function deleteById(model, id) {
     }
 }
 
-export function verificationNull(req) {
-    let empty = false;
-    // Padrão de retorno falso
-    const keys = Object.keys(req.body);
+export function verificationNull(req, method, extraField = null) {
+    if (method == "POST") {
+        let notEmpty = true;
+        // Padrão de retorno falso
+        const keys = Object.keys(req.body);
 
-
-    for (let i = 0; i < keys.length; i++) {
-        // req.body[keys[i]] representa o valor da chave, no índice específico, do corpo da requisição
-        const value = req.body[keys[i]];
-        // Aqui, value é o valor em si, enquanto que keys[i] remete ao nome do campo.
-        if ((value === undefined || value === null || value === "") && keys[i].toLowerCase() !== "foto") {
-            empty = true;
+        if (extraField) {
+            const extraValue = req.body[extraField];
+            if (extraValue === undefined || extraValue === null || extraValue === "") {
+                notEmpty = false;// Já pode retornar false aqui
+            }
         }
+
+        for (let i = 0; i < keys.length; i++) {
+            // req.body[keys[i]] representa o valor da chave, no índice específico, do corpo da requisição
+            const value = req.body[keys[i]];
+            // Aqui, value é o valor em si, enquanto que keys[i] remete ao nome do campo.
+            if ((value === undefined || value === null || value === "") && keys[i].toLowerCase() !== "foto") {
+                notEmpty = false;
+                break;
+            }
+        } 
+
+    return notEmpty;
     }
-    return empty;
+    else if(method == "PATCH"){
+        let semCampos = true;
+        const keys = Object.keys(req.body);
+
+        for (let i = 0; i < keys.length; i++) {
+            const value = req.body[keys[i]];
+            if (value !== undefined && value !== null && value !== "") {
+                semCampos = false;
+                break;
+            }
+        }
+        return semCampos;
+    }
 }

@@ -1,3 +1,4 @@
+import e from 'express';
 import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
 import { create, findAll, findById, verificationNull, patch, deleteById } from './services/acessServices.js'
 import bcrypt from 'bcrypt';
@@ -45,7 +46,7 @@ export async function getAnimaisById(req, res) {
 
 export async function postAnimal(req, res) {
     try {
-        if (!req.body || verificationNull(req, 1) == true) {
+        if (!req.body || verificationNull(req, "POST") == true) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).json(await create(Animal, req.body));
@@ -57,6 +58,9 @@ export async function postAnimal(req, res) {
 export async function postUsuarios(req, res) {
     try {
         req.body.senha = await bcrypt.hash(req.body.senha, 10);
+        if (!req.body || verificationNull(req, "POST") == true) {
+            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
+        }
         return res.status(201).send(await create(Usuario, req.body));
     } catch (error) {
         console.error('Deu erro na rota postUsuarios: ', error);
@@ -67,7 +71,7 @@ export async function postUsuarios(req, res) {
 
 export async function postQuestionario(req, res) {
     try {
-        if (!req.body || verificationNull(req) == true) {
+        if (!req.body || verificationNull(req, "POST") == true) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).json(await create(Questionario, req.body));
@@ -78,7 +82,7 @@ export async function postQuestionario(req, res) {
 
 export async function postAdocoes(req, res) {
     try {
-        if (!req.body || verificationNull(req) == true) {
+        if (!req.body || verificationNull(req, "POST") == true) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
         return res.status(201).send(await create(PedidoAdocao, req.body));
@@ -97,8 +101,8 @@ export async function postLogin(req, res) {
 
 export async function postDoacoes(req, res) {
     try {
-        if (!req.body || verificationNull(req) == true) {
-            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
+        if (!req.body || verificationNull(req, "POST", "valor") == false) {
+            return res.status(400).send(`Erro: Valor da doação é obrigatório e deve ser um número positivo.`)
         }
         return res.status(201).send(await create(Doacao, req.body)); 
     } catch (error) {
@@ -109,6 +113,9 @@ export async function postDoacoes(req, res) {
 /*FUNÇÕES PATCH*/
 export async function patchUsuarios(req, res) {
     try {
+        if (!req.body || verificationNull(req, "PATCH") == true) {
+            return res.status(400).send(`Erro: Pelo menos um campo deve ser enviado para atualização.`)
+        }
         return res.status(200).send(await patch(Usuario, req.params.id, req.body));
     } catch (error) {
         console.error('Deu erro na rota patchUsuarios: ', error);
@@ -117,6 +124,9 @@ export async function patchUsuarios(req, res) {
 
 export async function patchAdmAnimais(req, res) {
     try {
+        if (!req.body || verificationNull(req, "PATCH") == true) {
+            return res.status(400).send(`Erro: Pelo menos um campo deve ser enviado para atualização.`)
+        }
         if (JSON.parse(req.body.administrador) === true) {
             return res.status(200).send(await patch(Animal, req.params.id, req.body));
         }
@@ -124,6 +134,7 @@ export async function patchAdmAnimais(req, res) {
         console.error('Deu erro na rota patchAdmAnimais: ', error);
     }
 }
+
 /*--------------------------------------------------------------*/
 /*FUNÇÕES DELETE*/
 
