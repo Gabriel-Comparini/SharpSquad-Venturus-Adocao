@@ -92,7 +92,11 @@ export async function postAdocoes(req, res) {
 }
 
 export async function postLogin(req, res) {
-    try {      
+    try {
+        const {email, senha} = req.body;
+        const user = await User.findOne
+        if(bcrypt.compare(senha, ) === true)
+
         return res.status(201).send(`Login bem sucedido!`);
     } catch (error) {
         console.error('Deu erro na rota postLogin: ', error);
@@ -101,8 +105,14 @@ export async function postLogin(req, res) {
 
 export async function postDoacoes(req, res) {
     try {
-        if (!req.body || verificationNull(req, "POST", "valor") == false) {
-            return res.status(400).send(`Erro: Valor da doação é obrigatório e deve ser um número positivo.`)
+        if (!req.body || verificationNull(req, "POST") == false) {
+            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`);
+        }
+        else{
+            const { valor } = req.body;
+            if(!valor || valor <= 0 || valor === null || valor === undefined || valor === ""){
+                return res.status(400).send(`Erro: Valor da doação é obrigatório e deve ser um número positivo.`);
+            }
         }
         return res.status(201).send(await create(Doacao, req.body)); 
     } catch (error) {

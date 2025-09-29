@@ -1,4 +1,4 @@
-export async function findAll(model){
+export async function findAll(model) {
     try {
         return await model.findAll();
     } catch (error) {
@@ -52,18 +52,11 @@ export async function deleteById(model, id) {
     }
 }
 
-export function verificationNull(req, method, extraField = null) {
+export function verificationNull(req, method) {
     if (method == "POST") {
         let notEmpty = true;
-        // Padrão de retorno falso
+        // Padrão de retorno true
         const keys = Object.keys(req.body);
-
-        if (extraField) {
-            const extraValue = req.body[extraField];
-            if (extraValue === undefined || extraValue === null || extraValue === "") {
-                notEmpty = false;// Já pode retornar false aqui
-            }
-        }
 
         for (let i = 0; i < keys.length; i++) {
             // req.body[keys[i]] representa o valor da chave, no índice específico, do corpo da requisição
@@ -73,11 +66,11 @@ export function verificationNull(req, method, extraField = null) {
                 notEmpty = false;
                 break;
             }
-        } 
+        }
 
-    return notEmpty;
+        return notEmpty;
     }
-    else if(method == "PATCH"){
+    else if (method == "PATCH") {
         let semCampos = true;
         const keys = Object.keys(req.body);
 
