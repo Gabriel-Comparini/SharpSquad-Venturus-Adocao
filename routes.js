@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 
 /*FUNÇÕES GET*/
 export async function getAnimal(req, res) {
-    try {
+    try {parseBool
         return res.status(201).send(await findAll(Animal));
     } catch (error) {
         return res.status(500).send("Erro ao consultar animais");

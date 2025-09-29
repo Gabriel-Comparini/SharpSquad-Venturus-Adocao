@@ -1,17 +1,21 @@
 import { Sequelize } from 'sequelize';
-import sqlite from 'sqlite3'
 import AnimalModel from './Animal.js';
 import UsuarioModel from './Usuario.js';
 import QuestionarioModel from './Questionario.js';
 import PedidoAdocaoModel from './PedidoAdocao.js';
 import DoacaoModel from './Doacao.js';
+import dotenv from 'dotenv';
 
-const sqlite3 = sqlite.verbose();
-const db = new sqlite3.Database('database.db');
+dotenv.config();
 
 export const sequelize = new Sequelize({
-    dialect: 'sqlite',
-    storage: './database.db',
+    username: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    dialect: process.env.DB_DIALECT,
+    logging: Boolean(process.env.DB_LOGIN)
 });
 
 export const Animal = AnimalModel(sequelize);
