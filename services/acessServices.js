@@ -1,5 +1,3 @@
-import { Sequelize, where } from "sequelize";
-
 export async function findAll(model){
     try {
         return await model.findAll();
