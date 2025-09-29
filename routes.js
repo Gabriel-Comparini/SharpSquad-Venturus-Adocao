@@ -21,9 +21,12 @@ export async function getUsuarios(req, res) {
 
 export async function getAdmAnimais(req, res) {
     try {
-        if (JSON.parse(req.body.administrador) === true) {
-            return res.status(200).send(await findAll(Animal));
-        }
+        // if (JSON.parse(req.body.administrador) === true) {
+        
+        const animais = await findAll(Animal);
+        const numeroAnimais = animais.length;
+        return res.status(200).send({"data": animais, "total": numeroAnimais});
+        // }
     } catch (error) {
         console.error('Deu erro na rota getAdmAnimais: ', error);
     }
