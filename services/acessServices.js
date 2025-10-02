@@ -108,3 +108,12 @@ export async function getAdm(model, id) {
         console.error(error);
     }
 }
+
+export async function findUserByEmail(model, email) {
+    try {
+        return await model.findOne({ where: { email: email } });
+    } catch (error) {
+        console.error('Erro ao procurar por email: ', error);
+        throw error;
+    }
+}
