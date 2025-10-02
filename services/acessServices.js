@@ -91,3 +91,20 @@ export function verificationNull(req, method, extraField = null) {
         return semCampos;
     }
 }
+
+export async function getAdm(model, id) {
+    try {
+        const user = await findById(model, id)
+        if (!user) {
+            return console.error('Deu ruim');
+        }
+
+        if (JSON.parse(user.administrador)){
+            return true;
+        }  else {
+            return false;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
