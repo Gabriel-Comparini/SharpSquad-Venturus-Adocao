@@ -91,3 +91,12 @@ export function verificationNull(req, method, extraField = null) {
         return semCampos;
     }
 }
+
+export async function findUserByEmail(model, email) {
+    try {
+        return await model.findOne({ where: { email: email } });
+    } catch (error) {
+        console.error('Erro ao procurar por email: ', error);
+        throw error;
+    }
+}

@@ -1,6 +1,6 @@
 import e from 'express';
 import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
-import { create, findAll, findById, verificationNull, patch, deleteById } from './services/acessServices.js'
+import { create, findAll, findById, verificationNull, patch, deleteById, findUserByEmail } from './services/acessServices.js'
 import bcrypt from 'bcrypt';
 
 /*FUNÇÕES GET*/
@@ -93,6 +93,11 @@ export async function postAdocoes(req, res) {
 
 export async function postLogin(req, res) {
     try {      
+        const user = await findUserByEmail(Usuario, req.body.email);
+        const { id } = user;
+        if(!user){
+            return res.status(404).send("Usuário não encontrado");
+        }
         return res.status(201).send(`Login bem sucedido!`);
     } catch (error) {
         console.error('Deu erro na rota postLogin: ', error);
