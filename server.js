@@ -1,5 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import Usuario from './models/Usuario.js';
 import { deleteAdmAnimais, getAdmAnimais, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postUsuarios, getAnimaisById, patchUsuarios, getUsuarios } from './routes.js';
 
 export const app = express();

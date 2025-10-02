@@ -84,3 +84,9 @@ export function verificationNull(req, method) {
         return semCampos;
     }
 }
+
+export async function addSeedsAdmin (model) {
+    return await model.create({
+        
+    })
+}
