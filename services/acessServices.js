@@ -118,9 +118,14 @@ export async function findUserByEmail(model, email) {
     }
 }
 
-export async function getAnythingByUserId(model, userId){
+export async function getAnythingByUserId(model, userId, uniqueSearch = false){
     try {
-        return await model.findAll({ where: { tutorId: userId}});
+        if(!uniqueSearch){
+            return await model.findAll({ where: { tutorId: userId}});
+        }
+        else{
+            return await model.findOne({ where: { tutorId: userId}});
+        }
     } catch (error) {
         return console.error("Erro ao acessar dados do usuário: ", error);
     }
