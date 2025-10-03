@@ -7,7 +7,8 @@ export async function getAnimal(req, res) {
     try {
         return res.status(200).send(await findAll(Animal));
     } catch (error) {
-        return res.status(500).send("Erro ao consultar animais");
+        console.error('Erro ao buscar animais: ', error);
+        return res.status(500).send("Erro ao buscar animais");
     }
 }
 
@@ -20,7 +21,7 @@ export async function getUsuarios(req, res) {
 
         return res.status(200).send(user);
     } catch (error) {
-        console.error('Deu erro na rota getUsuarios: ', error);
+        console.error('Erro ao acessar usuários: ', error);
         return res.status(500).send("Erro ao buscar dados do usuário");
     }
 }
@@ -36,7 +37,7 @@ export async function getAdmAnimais(req, res) {
         const numeroAnimais = animais.length;
         return res.status(200).send({"data": animais, "total": numeroAnimais});
     } catch (error) {
-        console.error('Deu erro na rota getAdmAnimais: ', error);
+        console.error('Erro ao buscar animais: ', error);
         return res.status(500).send("Erro ao buscar animais");
     }
 }
@@ -45,6 +46,7 @@ export async function getAnimaisById(req, res) {
     try {
         return res.status(200).send(await findById(Animal, req.params.id));
     } catch (error) {
+        console.error('Erro ao consultar animal: ', error);
         return res.status(500).send("Erro ao consultar animal");
     }
 }
@@ -59,6 +61,7 @@ export async function postAnimal(req, res) {
         }
         return res.status(201).json(await create(Animal, req.body));
     } catch (error) {
+        console.error('Erro ao criar animal: ', error);
         return res.status(500).send(`Erro ao criar animal`);
     }
 }
@@ -79,7 +82,7 @@ export async function postUsuarios(req, res) {
 
         return res.status(201).send(await create(Usuario, req.body));
     } catch (error) {
-        console.error('Deu erro na rota postUsuarios: ', error);
+        console.error('Erro ao cadastrar o usuário: ', error);
         return res.status(500).send({"erro": "Erro interno ao cadastrar o tutor."});
 
     }
@@ -141,7 +144,7 @@ export async function postAdocoes(req, res) {
 
         return res.status(201).send(await create(PedidoAdocao, req.body));
     } catch (error) {
-        console.error('Deu erro na rota postAdocoes: ', error);
+        console.error('Erro ao registrar pedido de adoção: ', error);
         return res.status(500).send("Erro ao registrar pedido de adoção");
     }
 }
@@ -164,7 +167,7 @@ export async function postLogin(req, res) {
         return res.status(201).send(`Login bem sucedido!`);
     
     } catch (error) {
-        console.error('Deu erro na rota postLogin: ', error);
+        console.error('Erro ao tentar realizar o login: ', error);
         return res.status(500).send("Erro interno ao tentar fazer o login");
     }
 }
@@ -176,7 +179,7 @@ export async function postDoacoes(req, res) {
         }
         return res.status(201).send(await create(Doacao, req.body)); 
     } catch (error) {
-        console.error('Deu erro na rota postDoacoes: ', error);
+        console.error('Erro ao tentar processar a doação: ', error);
         return res.status(500).send("Erro ao processar a doação");
     }
 }
@@ -189,7 +192,7 @@ export async function patchUsuarios(req, res) {
         }
         return res.status(200).send(await patch(Usuario, req.params.id, req.body));
     } catch (error) {
-        console.error('Deu erro na rota patchUsuarios: ', error);
+        console.error('Erro ao tentar atualizar dados do usuário: ', error);
         return res.status(500).send("Erro ao atualizar usuário");
     }
 }
@@ -206,7 +209,7 @@ export async function patchAdmAnimais(req, res) {
             return res.status(200).send(await patch(Animal, req.params.id, req.body));
         }
     } catch (error) {
-        console.error('Deu erro na rota patchAdmAnimais: ', error);
+        console.error('Erro ao tentar atualizar dados do animal: ', error);
         return res.status(500).send("Erro ao atualizar animal");
     }
 }
@@ -226,7 +229,7 @@ export async function deleteAdmAnimais(req, res) {
             return res.status(403).send("Acesso não autorizado");
         }
     } catch (error) {
-        console.error('Deu erro na rota deleteAdmAnimais: ', error);
+        console.error('Erro ao tentar deletar animal: ', error);
         return res.status(500).send("Erro ao deletar animal");
     }
 }

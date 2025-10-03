@@ -17,6 +17,9 @@ import dotenv from 'dotenv';
 //     dialect: process.env.DB_DIALECT,
 //     logging: Boolean(process.env.DB_LOGIN)
 // });
+
+// Fabricio precisa usar isso daqui
+
 export const sequelize = new Sequelize({
     dialect: 'sqlite',
     storage: './database.sqlite',
