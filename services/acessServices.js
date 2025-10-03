@@ -92,7 +92,7 @@ export function verificationNull(req, method, extraField = null) {
     }
 }
 
-export async function getAdm(model, id) {
+export async function isAdm(model, id) {
     try {
         const user = await findById(model, id)
         if (!user) {
@@ -115,5 +115,13 @@ export async function findUserByEmail(model, email) {
     } catch (error) {
         console.error('Erro ao procurar por email: ', error);
         throw error;
+    }
+}
+
+export async function getAnythingByUserId(model, userId){
+    try {
+        return await model.findAll({ where: { tutorId: userId}});
+    } catch (error) {
+        return console.error("Erro ao acessar dados do usuário: ", error);
     }
 }

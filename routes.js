@@ -1,12 +1,11 @@
 import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
-import { create, findAll, findById, verificationNull, patch, deleteById, getAdm } from './services/acessServices.js'
-import { create, findAll, findById, verificationNull, patch, deleteById, findUserByEmail } from './services/acessServices.js'
+import { create, findAll, findById, verificationNull, patch, deleteById, findUserByEmail, isAdm, getAnythingByUserId } from './services/acessServices.js'
 import bcrypt from 'bcrypt';
 
 /*FUNÇÕES GET*/
 export async function getAnimal(req, res) {
     try {
-        return res.status(201).send(await findAll(Animal));
+        return res.status(200).send(await findAll(Animal));
     } catch (error) {
         return res.status(500).send("Erro ao consultar animais");
     }
@@ -23,8 +22,8 @@ export async function getUsuarios(req, res) {
 export async function getAdmAnimais(req, res) {
     try {
         const { id } = req.query;
-        const isAdm = await getAdm(Usuario, id);
-        if (!isAdm) return res.status(403).send({
+        const administrador = await isAdm(Usuario, id);
+        if (!administrador) return res.status(403).send({
             "error": "Você está autenticado, mas não tem permissão para acessar este recurso."
         });
         const animais = await findAll(Animal);
@@ -63,6 +62,14 @@ export async function postUsuarios(req, res) {
         if (!req.body || verificationNull(req, "POST") == false) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
+
+        const { email } = req.body;
+        const anyOtherUser = await findUserByEmail(Usuario, email);
+
+        if(anyOtherUser){
+            return res.status(400).send("Email preenchido já está sendo utilizado");
+        }
+
         return res.status(201).send(await create(Usuario, req.body));
     } catch (error) {
         console.error('Deu erro na rota postUsuarios: ', error);
@@ -87,6 +94,39 @@ export async function postAdocoes(req, res) {
         if (!req.body || verificationNull(req, "POST") == false) {
             return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
         }
+
+        const { tutorId, animalId } = req.body;
+        const pedidosAnteriores = await getAnythingByUserId(PedidoAdocao, tutorId);
+
+        console.log(pedidosAnteriores || "nulo");
+
+        let numeroDePedidosIguais = 0;
+        if(pedidosAnteriores && pedidosAnteriores.length >= 1){
+            for(let i = 0; i < pedidosAnteriores.length; i++){
+                if(pedidosAnteriores[i].animalId === animalId){
+                    numeroDePedidosIguais++;
+                }
+            }
+            if(numeroDePedidosIguais >= 1){
+                return res.status(409).send("Este tutor já tem um pedido de adoção para este animal");
+            }
+  
+        }
+        
+        const tutor_questionario = await getAnythingByUserId(Questionario, tutorId);
+        // console.log(tutor_questionario);
+        if(!tutor_questionario || tutor_questionario.length === 0){
+            return res.status(400).send("O tutor ainda não respondeu o questionário obrigatório");
+        }
+
+        const animal = await findById(Animal, animalId);
+        const tutor = await findById(Usuario, tutorId);
+
+        if(!tutor || !animal){
+            return res.status(400).send("Tutor ou animal não encontrado");
+        }
+
+
         return res.status(201).send(await create(PedidoAdocao, req.body));
     } catch (error) {
         console.error('Deu erro na rota postAdocoes: ', error);
@@ -99,11 +139,17 @@ export async function postLogin(req, res) {
         // const hashedPassword  = await bcrypt.hash(senha, 10);
         // return res.status(201).send(await getAdm(Usuario, hashedPassword, email));
         const user = await findUserByEmail(Usuario, req.body.email);
-        const { id } = user;
+        
         if(!user){
             return res.status(404).send("Usuário não encontrado");
         }
+
+        if(user.email != req.body.email || (await bcrypt.compare(req.body.senha, user.senha) === false)){
+            return res.status(401).send("Email ou senha inválidos");
+        }
+
         return res.status(201).send(`Login bem sucedido!`);
+    
     } catch (error) {
         console.error('Deu erro na rota postLogin: ', error);
     }
@@ -134,10 +180,13 @@ export async function patchUsuarios(req, res) {
 
 export async function patchAdmAnimais(req, res) {
     try {
+        const { id } = req.query;
+        const administrador = await isAdm(Usuario, id);
+
         if (!req.body || verificationNull(req, "PATCH") == true) {
             return res.status(400).send(`Erro: Pelo menos um campo deve ser enviado para atualização.`)
         }
-        if (JSON.parse(req.body.administrador) === true) {
+        if(administrador === true){
             return res.status(200).send(await patch(Animal, req.params.id, req.body));
         }
     } catch (error) {
@@ -150,8 +199,14 @@ export async function patchAdmAnimais(req, res) {
 
 export async function deleteAdmAnimais(req, res) {
     try {
-        if (JSON.parse(req.body.administrador) === true) {
+        const { id } = req.query;
+        const administrador = await isAdm(Usuario, id);
+
+        if(administrador === true) {
             return res.status(204).send(await deleteById(Animal, req.params.id));
+        }
+        else{
+            return res.status(403).send("Acesso não autorizado");
         }
     } catch (error) {
         console.error('Deu erro na rota deleteAdmAnimais: ', error);
