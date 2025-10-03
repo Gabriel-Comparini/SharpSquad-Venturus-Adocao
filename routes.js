@@ -57,12 +57,12 @@ export async function getAnimaisById(req, res) {
 export async function postAnimal(req, res) {
     try {
         if (!req.body || verificationNull(req, "POST") == false) {
-            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
+            return res.status(400).send({"erro": "Todos os campos obrigatórios devem ser preenchidos corretamente."})
         }
         return res.status(201).json(await create(Animal, req.body));
     } catch (error) {
         console.error('Erro ao criar animal: ', error);
-        return res.status(500).send(`Erro ao criar animal`);
+        return res.status(500).send({"erro": "Erro interno ao cadastrar o animal."});
     }
 }
 
@@ -70,14 +70,14 @@ export async function postUsuarios(req, res) {
     try {
         req.body.senha = await bcrypt.hash(req.body.senha, 10);
         if (!req.body || verificationNull(req, "POST") == false) {
-            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
+            return res.status(400).send({"erro": "Todos os campos obrigatórios devem ser preenchidos corretamente."})
         }
 
         const { email } = req.body;
         const anyOtherUser = await findUserByEmail(Usuario, email);
 
         if(anyOtherUser){
-            return res.status(400).send("Email preenchido já está sendo utilizado");
+            return res.status(400).send({"erro": "Email preenchido já está sendo utilizado."});
         }
 
         return res.status(201).send(await create(Usuario, req.body));
@@ -164,7 +164,7 @@ export async function postLogin(req, res) {
             return res.status(401).send("Email ou senha inválidos");
         }
 
-        return res.status(201).send(`Login bem sucedido!`);
+        return res.status(201).send(`Login bem-sucedido!`);
     
     } catch (error) {
         console.error('Erro ao tentar realizar o login: ', error);
