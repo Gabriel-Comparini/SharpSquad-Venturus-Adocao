@@ -96,7 +96,7 @@ export async function isAdm(model, id) {
     try {
         const user = await findById(model, id)
         if (!user) {
-            return console.error('Deu ruim');
+            return console.error('Erro ao verificar administrador');
         }
 
         if (JSON.parse(user.administrador)){
@@ -129,4 +129,74 @@ export async function getAnythingByUserId(model, userId, uniqueSearch = false){
     } catch (error) {
         return console.error("Erro ao acessar dados do usuário: ", error);
     }
+}
+
+export async function startSeed(model){
+    try{
+
+        const admins = await model.findAll({ where: { administrador: true}});
+        if(admins && admins.length > 0){
+            return;
+        }
+
+        create(model, {
+            nome_completo: "Breno Valentim Bernardo",
+            idade: 17,
+            email: "emaildobreno",
+            senha: "senhadobreno",
+            telefone: "telefonedobreno",
+            instagram: "instadobreno",
+            facebook: "facebookdobreno",
+            cidade: "cidadedobreno",
+            estado: "estadodobreno",
+            administrador: true
+        });
+        
+        create(model, {
+            nome_completo: "Fabricio de Araujo Krull",
+            idade: 17,
+            email: "emaildofabricio",
+            senha: "senhadofabricio",
+            telefone: "telefonedofabricio",
+            instagram: "instadofabricio",
+            facebook: "facebookdofabricio",
+            cidade: "cidadedofabricio",
+            estado: "estadodofabricio",
+            administrador: true
+        });
+        
+        create(model, {
+            nome_completo: "Gabriel de Carvalho Comparini",
+            idade: 17,
+            email: "emaildocomparini",
+            senha: "senhadocomparini",
+            telefone: "telefonedocomparini",
+            instagram: "instadocomparini",
+            facebook: "facebookdocomparini",
+            cidade: "cidadedocomparini",
+            estado: "estadodocomparini",
+            administrador: true
+        });
+        
+        create(model, {
+            nome_completo: "João Pedro Crepaldi Gonçalves",
+            idade: 17,
+            email: "emaildocrepaldi",
+            senha: "senhadocrepaldi",
+            telefone: "telefonedocrepaldi",
+            instagram: "instadocrepaldi",
+            facebook: "facebookdocrepaldi",
+            cidade: "cidadedocrepaldi",
+            estado: "estadodocrepaldi",
+            administrador: true
+        });
+    }
+    catch(error){
+        console.error("Erro ao iniciar seed: ", error);
+    }
+
+}
+
+export async function devGetAll(model){
+    return console.log(await findAll(model));
 }

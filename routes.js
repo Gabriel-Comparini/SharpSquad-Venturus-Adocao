@@ -18,7 +18,7 @@ export async function getUsuarios(req, res) {
         const questionario = await getAnythingByUserId(Questionario, req.params.id, true);
 
         if (!user) {
-            return res.status.send({"erro": "Tutor não encontrado"});
+            return res.status(404).send({"erro": "Tutor não encontrado"});
         }
 
         user.dataValues.questionario = questionario;

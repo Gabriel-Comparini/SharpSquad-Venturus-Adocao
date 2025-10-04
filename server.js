@@ -1,9 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import { Usuario } from './models/Modelos.js';
+import { devGetAll, startSeed } from './services/acessServices.js';
 import { deleteAdmAnimais, getAdmAnimais, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postUsuarios, getAnimaisById, patchUsuarios, getUsuarios } from './routes.js';
 
 export const app = express();
 app.use(express.json());
+
+// devGetAll(Usuario);
+
+startSeed(Usuario);
+
 const port = 3000;
 const host = 'localhost';
 
@@ -11,7 +18,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 
 app.get('/', (req, res) => {
-    res.send('<strong>Server ta funfando com sucesso!</strong>');
+    res.send('<strong>Server rodando com sucesso!</strong>');
 });
 
 app.get("/animais", (req, res) => {
