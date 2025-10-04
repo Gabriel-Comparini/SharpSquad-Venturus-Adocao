@@ -6,25 +6,25 @@
 |---------------------------|---------------------------
 | POST /usuarios            | Funciona
 |---------------------------|---------------------------
-| PATCH /usuarios/:id       | Funciona
+| PATCH /usuarios/:id       | Funciona  ====  DAR UMA VERIFICADA MELHOR
 |---------------------------|---------------------------
 | GET /usuarios/:id         | Funciona
 |---------------------------|---------------------------
-| POST /questionário        | funciona
+| POST /questionário        | Funciona
 |---------------------------|---------------------------
-| POST /adocoes             | Funciona
+| POST /adocoes             | Funciona (não totalmente)
 |---------------------------|---------------------------
-| GET /admin/animais        | Logica feita, ainda não está pronto (todos os adms estão assim)
+| GET /admin/animais        | Funciona
 |---------------------------|---------------------------
-| PATCH /admin/animais/:id  | Logica feita, ainda não está pronto (todos os adms estão assim)
+| PATCH /admin/animais/:id  | Funciona  ====  DAR UMA VERIFICADA MELHOR 
 |---------------------------|---------------------------
-| DELETE /admin/animais/:id | Logica feita, ainda não está pronto (todos os adms estão assim)
+| DELETE /admin/animais/:id | Funciona
 |---------------------------|---------------------------
 | GET /animais/:id          | Funciona
 |---------------------------|---------------------------
-| POST /login               | Funciona (melhor rever)
+| POST /login               | Funciona
 |---------------------------|---------------------------
-| POST /doacoes             | Funciona (melhor rever)
+| POST /doacoes             | Não 
 
 *------------------------------------------------------*
 

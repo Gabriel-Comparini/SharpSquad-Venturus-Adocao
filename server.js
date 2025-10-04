@@ -68,6 +68,5 @@ app.post('/doacoes', (req, res) => {
 
 app.listen(port, (err) => {
     if (err) return console.error('Deu erro aí: ',err);
-
     console.log(`Servidor rodando em http://${host}:${port}/`);
 });

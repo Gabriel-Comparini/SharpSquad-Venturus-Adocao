@@ -8,7 +8,7 @@ export async function getAnimal(req, res) {
         return res.status(200).send(await findAll(Animal));
     } catch (error) {
         console.error('Erro ao buscar animais: ', error);
-        return res.status(500).send("Erro ao buscar animais");
+        return res.status(500).send({"erro": "Erro ao buscar animais"});
     }
 }
 
@@ -17,12 +17,16 @@ export async function getUsuarios(req, res) {
         const user = await findById(Usuario, req.params.id);
         const questionario = await getAnythingByUserId(Questionario, req.params.id, true);
 
-        user.dataValues.questionario = questionario
+        if (!user) {
+            return res.status.send({"erro": "Tutor não encontrado"});
+        }
+
+        user.dataValues.questionario = questionario;
 
         return res.status(200).send(user);
     } catch (error) {
         console.error('Erro ao acessar usuários: ', error);
-        return res.status(500).send("Erro ao buscar dados do usuário");
+        return res.status(500).send({"erro": "Erro ao buscar dados do tutor"});
     }
 }
 
@@ -30,24 +34,28 @@ export async function getAdmAnimais(req, res) {
     try {
         const { id } = req.query;
         const administrador = await isAdm(Usuario, id);
-        if (!administrador) return res.status(403).send({
-            "error": "Você está autenticado, mas não tem permissão para acessar este recurso."
-        });
+        if (!administrador) return res.status(403).send({"error": "Você está autenticado, mas não tem permissão para acessar este recurso."});
         const animais = await findAll(Animal);
         const numeroAnimais = animais.length;
         return res.status(200).send({"data": animais, "total": numeroAnimais});
     } catch (error) {
         console.error('Erro ao buscar animais: ', error);
-        return res.status(500).send("Erro ao buscar animais");
+        return res.status(500).send({"erro": "Erro ao buscar animais"});
     }
 }
 
 export async function getAnimaisById(req, res) {
     try {
+        const animal = await findById(Animal, req.params.id);
+
+        if(!animal) {
+            return res.status(404).send({"erro": "Animal não encontrado"});
+        }
+
         return res.status(200).send(await findById(Animal, req.params.id));
     } catch (error) {
         console.error('Erro ao consultar animal: ', error);
-        return res.status(500).send("Erro ao consultar animal");
+        return res.status(500).send({"erro": "Erro ao buscar dados do animal"});
     }
 }
 
@@ -91,7 +99,7 @@ export async function postUsuarios(req, res) {
 export async function postQuestionario(req, res) {
     try {
         if (!req.body || verificationNull(req, "POST") == false) {
-            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
+            return res.status(400).send({"erro": "Todos os campos obrigatórios devem ser preenchidos corretamente."});
         }
         
         const questionarioExistente = await getAnythingByUserId(Questionario, req.body.tutorId, true);
@@ -109,7 +117,7 @@ export async function postQuestionario(req, res) {
 export async function postAdocoes(req, res) {
     try {
         if (!req.body || verificationNull(req, "POST") == false) {
-            return res.status(400).send(`Erro: Todos os campos obrigatórios devem ser preenchidos corretamente.`)
+            return res.status(400).send({"erro": "O tutor ainda não respondeu o questionário obrigatório"});
         }
 
         const { tutorId, animalId } = req.body;
@@ -123,64 +131,59 @@ export async function postAdocoes(req, res) {
                 }
             }
             if(numeroDePedidosIguais >= 1){
-                return res.status(409).send("Este tutor já tem um pedido de adoção para este animal");
+                return res.status(409).send({"erro": "Este tutor já tem um pedido de adoção para este animal"});
             }
-  
         }
         
         const tutor_questionario = await getAnythingByUserId(Questionario, tutorId);
         
         if(!tutor_questionario){
-            return res.status(400).send("O tutor ainda não respondeu o questionário obrigatório");
+            return res.status(400).send({"erro": "O tutor ainda não respondeu o questionário obrigatório"});
         }
 
         const animal = await findById(Animal, animalId);
         const tutor = await findById(Usuario, tutorId);
 
         if(!tutor || !animal){
-            return res.status(400).send("Tutor ou animal não encontrado");
+            return res.status(404).send({"erro": "Tutor ou animal não encontrado"});
         }
-
 
         return res.status(201).send(await create(PedidoAdocao, req.body));
     } catch (error) {
         console.error('Erro ao registrar pedido de adoção: ', error);
-        return res.status(500).send("Erro ao registrar pedido de adoção");
+        return res.status(500).send({"erro": "Erro ao registrar o pedido de adoção"});
     }
 }
 
 export async function postLogin(req, res) {
     try {      
-        // const { email, senha } = req.body;
-        // const hashedPassword  = await bcrypt.hash(senha, 10);
-        // return res.status(201).send(await getAdm(Usuario, hashedPassword, email));
         const user = await findUserByEmail(Usuario, req.body.email);
         
         if(!user){
-            return res.status(404).send("Usuário não encontrado");
+            return res.status(404).send({"erro": "Usuário não encontrado"});
         }
 
         if(user.email != req.body.email || (await bcrypt.compare(req.body.senha, user.senha) === false)){
-            return res.status(401).send("Email ou senha inválidos");
+            return res.status(401).send({"erro": "Email ou senha inválidos."});
         }
 
-        return res.status(201).send(`Login bem-sucedido!`);
+        return res.status(200).send(`Login bem-sucedido!`);
     
     } catch (error) {
         console.error('Erro ao tentar realizar o login: ', error);
-        return res.status(500).send("Erro interno ao tentar fazer o login");
+        return res.status(500).send({"erro": "Erro interno ao tentar fazer o login."});
     }
 }
 
 export async function postDoacoes(req, res) {
     try {
         if (!req.body || verificationNull(req, "POST", "valor") == false) {
-            return res.status(400).send(`Erro: Valor da doação é obrigatório e deve ser um número positivo.`)
+            return res.status(400).send({"erro": "Valor da doação é obrigatório e deve ser um número positivo"});
         }
         return res.status(201).send(await create(Doacao, req.body)); 
     } catch (error) {
         console.error('Erro ao tentar processar a doação: ', error);
-        return res.status(500).send("Erro ao processar a doação");
+        return res.status(500).send({"erro": "Erro ao processar a doação"});
     }
 }
 /*-------------------------------------------------------*/
@@ -188,12 +191,19 @@ export async function postDoacoes(req, res) {
 export async function patchUsuarios(req, res) {
     try {
         if (!req.body || verificationNull(req, "PATCH") == true) {
-            return res.status(400).send(`Erro: Pelo menos um campo deve ser enviado para atualização.`)
+            return res.status(400).send({"erro": "Pelo menos um campo deve ser enviado para atualização"});
         }
+
+        const tutor = await findById(Usuario, req.params.id);
+
+        if(!tutor){
+            return res.status(404).send({"erro": "Tutor ou animal não encontrado"});
+        }
+
         return res.status(200).send(await patch(Usuario, req.params.id, req.body));
     } catch (error) {
         console.error('Erro ao tentar atualizar dados do usuário: ', error);
-        return res.status(500).send("Erro ao atualizar usuário");
+        return res.status(500).send({"erro": "Erro ao atualizar os dados do tutor"});
     }
 }
 
@@ -201,16 +211,22 @@ export async function patchAdmAnimais(req, res) {
     try {
         const { id } = req.query;
         const administrador = await isAdm(Usuario, id);
+        const animal = await findById(Animal, req.params.id);
 
         if (!req.body || verificationNull(req, "PATCH") == true) {
-            return res.status(400).send(`Erro: Pelo menos um campo deve ser enviado para atualização.`)
+            return res.status(400).send({"erro": "Nenhum campo foi fornecido para atualização"});
         }
+
+        if(!animal) {
+            return res.status(404).send({"erro": "Animal não encontrado"});
+        }
+
         if(administrador === true){
             return res.status(200).send(await patch(Animal, req.params.id, req.body));
         }
     } catch (error) {
         console.error('Erro ao tentar atualizar dados do animal: ', error);
-        return res.status(500).send("Erro ao atualizar animal");
+        return res.status(500).send({"erro": "Erro ao atualizar o animal"});
     }
 }
 
@@ -221,16 +237,20 @@ export async function deleteAdmAnimais(req, res) {
     try {
         const { id } = req.query;
         const administrador = await isAdm(Usuario, id);
+        const animal = await findById(Animal, req.params.id);
+
+        if(!animal) {
+            return res.status(404).send({"erro": "Animal não encontrado"});
+        }
 
         if(administrador === true) {
             return res.status(204).send(await deleteById(Animal, req.params.id));
-        }
-        else{
-            return res.status(403).send("Acesso não autorizado");
+        } else {
+            return res.status(403).send({"erro": "Acesso não autorizado"});
         }
     } catch (error) {
         console.error('Erro ao tentar deletar animal: ', error);
-        return res.status(500).send("Erro ao deletar animal");
+        return res.status(500).send({"erro": "Erro ao remover animal"});
     }
 }
 /*--------------------------------------------------------------*/
