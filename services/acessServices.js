@@ -91,3 +91,42 @@ export function verificationNull(req, method, extraField = null) {
         return semCampos;
     }
 }
+
+export async function isAdm(model, id) {
+    try {
+        const user = await findById(model, id)
+        if (!user) {
+            return console.error('Deu ruim');
+        }
+
+        if (JSON.parse(user.administrador)){
+            return true;
+        }  else {
+            return false;
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function findUserByEmail(model, email) {
+    try {
+        return await model.findOne({ where: { email: email } });
+    } catch (error) {
+        console.error('Erro ao procurar por email: ', error);
+        throw error;
+    }
+}
+
+export async function getAnythingByUserId(model, userId, uniqueSearch = false){
+    try {
+        if(!uniqueSearch){
+            return await model.findAll({ where: { tutorId: userId}});
+        }
+        else{
+            return await model.findOne({ where: { tutorId: userId}});
+        }
+    } catch (error) {
+        return console.error("Erro ao acessar dados do usuário: ", error);
+    }
+}
