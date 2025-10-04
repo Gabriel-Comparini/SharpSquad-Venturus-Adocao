@@ -1,0 +1,92 @@
+========= Animal =================================================
+
+{
+    "id": "uuid",
+    "nome": "string",
+    "especie": "string",
+    "porte": "string",
+    "castrado": true,
+    "vacinado": true,
+    "descricao": "string",
+    "foto": "Buffer"
+}
+
+========= Usuario =================================================
+
+{
+    "id": "uuid",
+    "nome_completo": "string",
+    "senha":"string",
+    "email": "string",
+    "cidade": "string",
+    "estado": "string",
+    "idade": "number",
+    "telefone": "number",
+    "instagram": "string",
+    "facebook": "string"
+}
+
+========= Questionario =================================================
+
+{
+    "empregado": "boolean",
+    "quantos_animais_possui": "number",
+    "motivos_para_adotar": "string",
+    "quem_vai_sustentar_o_animal": "string",
+    "numero_adultos_na_casa": "number",
+    "numero_criancas_na_casa": "number",
+    "idades_criancas": \["string"\],
+    "residencia_tipo": "string", // "própria" ou "alugada,
+    "proprietario_permite_animais": "boolean",
+    "todos_de_acordo_com_adocao": "boolean",
+    "responsavel_pelo_animal": "string",
+    "responsavel_concorda_com_adocao": "boolean",
+    "ha_alergico_ou_pessoas_que_nao_gostam": "boolean",
+    "gasto_mensal_estimado": "number",
+    "valor_disponivel_no_orcamento": "boolean",
+    "tipo_alimentacao": "string",
+    "local_que_o_animal_vai_ficar": "string", // "quintal","área interna", "canil", "dentro de casa"
+    "forma_de_permanencia": "string", // "solto 24h", "preso", "preso de dia e solto à noite", "preso parte do dia"
+    "forma_de_confinamento": "string", // "corrente", "canil", "área fechada"
+    "tera_brinquedos": "boolean","tera_abrigo": "boolean",
+    "tera_passeios_acompanhado": "boolean",
+    "tera_passeios_sozinho": "boolean",
+    "companhia_outro_animal": "boolean",
+    "companhia_humana_24h": "boolean",
+    "companhia_humana_parcial": "boolean",
+    "sem_companhia_humana": "boolean",
+    "sem_companhia_animal": "boolean",
+    "o_que_faz_em_viagem": "string",
+    "o_que_faz_se_fugir": "string",
+    "o_que_faz_se_nao_puder_criar": "string",
+    "animais_que_ja_criou": "string",
+    "destino_animais_anteriores": "string",
+    "costuma_esterilizar": "boolean",
+    "costuma_vacinar": "boolean",
+    "costuma_vermifugar": "boolean",
+    "veterinario_usual": "string",
+    "forma_de_educar": "string",
+    "envia_fotos_e_videos_do_local": "boolean",
+    "aceita_visitas_e_fotos_do_animal": "boolean",
+    "topa_entrar_grupo_adotantes": "boolean",
+    "concorda_com_taxa_adocao": "boolean",
+    "data_disponivel_para_buscar_animal": "string"
+    "tutorId": "uuid"
+}
+
+========= Adoções =================================================
+
+{
+    "tutorId": "uuid",
+    "animalId": "uuid",
+    "status": "em_analise",
+    "posicao_fila": 1,
+    "criado_em": "YYYY-MM-DDTHH:MM:SSZ"
+}
+
+========= Login =================================================
+
+{
+    "email": "seu-email@dominio.com",
+    "senha": "sua-senha-secreta"
+}

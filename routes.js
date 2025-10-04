@@ -44,15 +44,29 @@ export async function getAdmAnimais(req, res) {
     }
 }
 
-export async function getAnimaisById(req, res) {
+export async function getAnimaisById(req, res) { // é uma rota admin também
     try {
+        const { id } = req.query;
+        const administrador = await isAdm(Usuario, id);
+        if (!administrador) return res.status(403).send({"error": "Você está autenticado, mas não tem permissão para acessar este recurso."});
+        
         const animal = await findById(Animal, req.params.id);
+
+        const pedidos = await findAll(PedidoAdocao, { where: { animalId: req.params.id }});
+
+        let pedidosId = [];
+
+        for(let i = 0; i < pedidos.length; i++){
+            pedidosId[i] = pedidos[i].id;
+        }
+
+        animal.dataValues.pedidos = pedidosId;
 
         if(!animal) {
             return res.status(404).send({"erro": "Animal não encontrado"});
         }
 
-        return res.status(200).send(await findById(Animal, req.params.id));
+        return res.status(200).send(animal);
     } catch (error) {
         console.error('Erro ao consultar animal: ', error);
         return res.status(500).send({"erro": "Erro ao buscar dados do animal"});

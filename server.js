@@ -1,6 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { Usuario } from './models/Modelos.js';
+import { sequelize, Usuario } from './models/Modelos.js';
 import { devGetAll, startSeed } from './services/acessServices.js';
 import { deleteAdmAnimais, getAdmAnimais, getAnimal, patchAdmAnimais, postAdocoes, postAnimal, postDoacoes, postLogin, postQuestionario, postUsuarios, getAnimaisById, patchUsuarios, getUsuarios } from './routes.js';
 

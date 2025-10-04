@@ -1,6 +1,6 @@
-export async function findAll(model){
+export async function findAll(model, where = null){
     try {
-        return await model.findAll();
+        return await model.findAll(where);
     } catch (error) {
         console.error('Erro ao procurar todos: ', error);
         throw error;
