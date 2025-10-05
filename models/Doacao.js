@@ -24,6 +24,13 @@ export default (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false 
         },
+        // ==================================================================================================
+        // Se der ruim, apaga aqui!
+        qrcode: { 
+            type: DataTypes.TEXT('small'),
+            allowNull: false 
+        },
+        // ==================================================================================================
         mensagem: {
             type: DataTypes.STRING,
             allowNull: false 

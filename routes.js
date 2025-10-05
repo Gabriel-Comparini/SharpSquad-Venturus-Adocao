@@ -1,6 +1,7 @@
 import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
 import { create, findAll, findById, verificationNull, patch, deleteById, findUserByEmail, isAdm, getAnythingByUserId } from './services/acessServices.js'
 import bcrypt from 'bcrypt';
+import { Pix } from 'faz-um-pix';
 
 /*FUNÇÕES GET*/
 export async function getAnimal(req, res) {
@@ -194,6 +195,16 @@ export async function postDoacoes(req, res) {
         if (!req.body || verificationNull(req, "POST", "valor") == false) {
             return res.status(400).send({"erro": "Valor da doação é obrigatório e deve ser um número positivo"});
         }
+
+        const pix = await Pix(req.body.email, req.body.nome, '', req.body.valor, '');
+        req.body.linkPix = pix;
+
+        // ==================================================================================================
+        // Se der ruim, apaga aqui!
+        const imgPix = await Pix(req.body.email, req.body.nome, '', req.body.valor, '', true);
+        req.body.qrcode = imgPix;
+        // ==================================================================================================
+
         return res.status(201).send(await create(Doacao, req.body)); 
     } catch (error) {
         console.error('Erro ao tentar processar a doação: ', error);
@@ -212,6 +223,10 @@ export async function patchUsuarios(req, res) {
 
         if(!tutor){
             return res.status(404).send({"erro": "Tutor ou animal não encontrado"});
+        }
+
+        if(tutor.administrador !== req.body.administrador) {
+            
         }
 
         return res.status(200).send(await patch(Usuario, req.params.id, req.body));
