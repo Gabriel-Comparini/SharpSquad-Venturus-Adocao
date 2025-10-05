@@ -1,4 +1,4 @@
-import {Animal, Doacao, PedidoAdocao, Questionario, Usuario} from './models/Modelos.js';
+import { Animal, Doacao, PedidoAdocao, Questionario, Usuario } from './models/Modelos.js';
 import { create, findAll, findById, verificationNull, patch, deleteById, findUserByEmail, isAdm, getAnythingByUserId } from './services/acessServices.js'
 import bcrypt from 'bcrypt';
 import { Pix } from 'faz-um-pix';

@@ -1,4 +1,6 @@
-export async function findAll(model, where = null){
+import bcrypt from 'bcrypt';
+
+export async function findAll(model, where){
     try {
         return await model.findAll(where);
     } catch (error) {
@@ -94,7 +96,7 @@ export function verificationNull(req, method, extraField = null) {
 
 export async function isAdm(model, id) {
     try {
-        const user = await findById(model, id)
+        const user = await findById(model, id);
         if (!user) {
             return console.error('Erro ao verificar administrador');
         }
@@ -105,7 +107,7 @@ export async function isAdm(model, id) {
             return false;
         }
     } catch (error) {
-        console.error(error);
+        console.error("Erro no isAdm: ", error);
     }
 }
 
@@ -143,7 +145,7 @@ export async function startSeed(model){
             nome_completo: "Breno Valentim Bernardo",
             idade: 17,
             email: "emaildobreno",
-            senha: "senhadobreno",
+            senha: await bcrypt.hash("senhadobreno", 10),
             telefone: "telefonedobreno",
             instagram: "instadobreno",
             facebook: "facebookdobreno",
@@ -156,7 +158,7 @@ export async function startSeed(model){
             nome_completo: "Fabricio de Araujo Krull",
             idade: 17,
             email: "emaildofabricio",
-            senha: "senhadofabricio",
+            senha: await bcrypt.hash("senhadofabricio", 10),
             telefone: "telefonedofabricio",
             instagram: "instadofabricio",
             facebook: "facebookdofabricio",
@@ -169,7 +171,7 @@ export async function startSeed(model){
             nome_completo: "Gabriel de Carvalho Comparini",
             idade: 17,
             email: "emaildocomparini",
-            senha: "senhadocomparini",
+            senha: await bcrypt.hash("senhadocomparini", 10),
             telefone: "telefonedocomparini",
             instagram: "instadocomparini",
             facebook: "facebookdocomparini",
@@ -182,7 +184,7 @@ export async function startSeed(model){
             nome_completo: "João Pedro Crepaldi Gonçalves",
             idade: 17,
             email: "emaildocrepaldi",
-            senha: "senhadocrepaldi",
+            senha: await bcrypt.hash("senhadocrepaldi", 10),
             telefone: "telefonedocrepaldi",
             instagram: "instadocrepaldi",
             facebook: "facebookdocrepaldi",

@@ -6,17 +6,17 @@
 |---------------------------|---------------------------
 | POST /usuarios            | Funciona
 |---------------------------|---------------------------
-| PATCH /usuarios/:id       | Funciona  ====  DAR UMA VERIFICADA MELHOR
+| PATCH /usuarios/:id       | Funciona
 |---------------------------|---------------------------
 | GET /usuarios/:id         | Funciona
 |---------------------------|---------------------------
 | POST /questionário        | Funciona
 |---------------------------|---------------------------
-| POST /adocoes             | Funciona (não totalmente)
+| POST /adocoes             | Funciona
 |---------------------------|---------------------------
 | GET /admin/animais        | Funciona
 |---------------------------|---------------------------
-| PATCH /admin/animais/:id  | Funciona  ====  DAR UMA VERIFICADA MELHOR 
+| PATCH /admin/animais/:id  | Funciona
 |---------------------------|---------------------------
 | DELETE /admin/animais/:id | Funciona
 |---------------------------|---------------------------
@@ -24,7 +24,7 @@
 |---------------------------|---------------------------
 | POST /login               | Funciona
 |---------------------------|---------------------------
-| POST /doacoes             | Não 
+| POST /doacoes             | Funciona 
 
 *------------------------------------------------------*
 
