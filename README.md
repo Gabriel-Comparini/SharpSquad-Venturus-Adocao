@@ -48,12 +48,12 @@ npm run start
 
 ## 👨‍💻 Equipe Sharp Squad
 
-| **Nomes** | **Cargos** | **Githubs** |
-|-----------|------------|-----------|
-| Breno Velentim | Gerente/Dev Fullstack | [Breno Valentim](https://github.com/Breno-V) |
-| Fabrício Krull | Dev Backend | [Fabrício Krull](https://github.com/Fabricio-Krull) |
-| Gabriel Comparini | Dev Fullstack | [Gabriel Comparini](https://github.com/Gabriel-Comparini)
-| João Crepaldi | Dev Frontend | [João Crepaldi](https://github.com/JooCrepaldi)
+| **Nomes** | **Cargos** | **Githubs** | **Turma** | 
+|-----------|------------|-------------| ----------|
+| Breno Velentim | Gerente/Dev Fullstack | [Breno Valentim](https://github.com/Breno-V) | Segunda-Feira (08/10)
+| Fabrício Krull | Dev Backend | [Fabrício Krull](https://github.com/Fabricio-Krull) | Segunda-Feira (08/10)
+| Gabriel Comparini | Dev Fullstack | [Gabriel Comparini](https://github.com/Gabriel-Comparini) | Segunda-Feira (08/10)
+| João Crepaldi | Dev Frontend | [João Crepaldi](https://github.com/JooCrepaldi) | Segunda-Feira (08/10)
 
 ## 🏫 Bibliotecas utilizadas
 
