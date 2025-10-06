@@ -13,7 +13,7 @@ O projeto de adoção de animais ofertado e apoiado pela empresa **[Venturus](ht
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nodejs/nodejs-original-wordmark.svg" width="100"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/npm/npm-original.svg" width="100"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/express/express-original-wordmark.svg" width="100"/>
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" width="100"/>
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/insomnia/insomnia-original.svg" width="100"/>
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vscode/vscode-original.svg" width="100"/>
 </p>
 
@@ -21,7 +21,7 @@ O projeto de adoção de animais ofertado e apoiado pela empresa **[Venturus](ht
 
 Para você conseguir ter êxito na clonagem e execução de nosso projeto, você deve ter um ambiente de desenvolvimento preparado para isso. <br>
 
-#### 1. Tenha o [Git](https://git-scm.com) instalado em sua máquina [Necesário para clonar o repositório remoto com o local]
+#### 1. Tenha o [Git](https://git-scm.com) instalado em sua máquina[Necesário para clonar o repositório remoto com o local]
 
 #### 2. Obtenha o [Node](https://www.nodejs.tech/pt-br/download) [necessário para a execução do servidor]
 
@@ -54,3 +54,17 @@ npm run start
 | Fabrício Krull | Dev Backend | [Fabrício Krull](https://github.com/Fabricio-Krull) |
 | Gabriel Comparini | Dev Fullstack | [Gabriel Comparini](https://github.com/Gabriel-Comparini)
 | João Crepaldi | Dev Frontend | [João Crepaldi](https://github.com/JooCrepaldi)
+
+## 🏫 Bibliotecas utilizadas
+
+### [BCrypt](https://www.npmjs.com/package/bcrypt) 🌊
+
+O BCrypt é uma biblioteca na qual facilita a criptografia e descriptografia de dados. A escolha de utilizar BCrypt ao invés de Encrypt.js foi um manuseio mais simples de criptografar dados seníveis como senhas e emails.
+
+### [Faz-um-Pix](https://www.npmjs.com/package/faz-um-pix) 💰
+
+A biblioteca faz um pix foi crucial para utilizarmos os dados proferidos pelo usuários para desenvolver um link de chave pix e um QR Code para facilitar o meio de transações financeiras.
+
+### [Dotenv](https://www.npmjs.com/package/dotenv) 🔐
+
+O Dotenv é a mais conhecida das bibliotecas e de suma importância para criar variáveis de um ambiente de desenvolvimento que contenham dados sensíveis, como chaves de APIs e senhas.
